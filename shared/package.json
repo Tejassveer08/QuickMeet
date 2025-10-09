@@ -1,0 +1,17 @@
+{
+  "name": "@quickmeet/shared",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "devDependencies": {
+    "typescript": "^5.6.2"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "author": "Cefalo https://github.com/Cefalo",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "class-transformer": "^0.5.1"
+  }
+}

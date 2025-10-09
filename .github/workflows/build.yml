@@ -1,0 +1,50 @@
+name: Build & Test
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.json'
+  pull_request:
+    branches:
+      - develop
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.json'
+
+env:
+  NODE_VERSION: '20.x'
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions: write-all
+
+    steps:
+      - name: 🗑️ Delete deployment
+        uses: strumwolf/delete-deployment-environment@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: 'development'
+          onlyRemoveDeployments: true
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js version
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies using npm workspaces
+        run: npm install
+
+      - name: Build all dependencies
+        run: npm run build

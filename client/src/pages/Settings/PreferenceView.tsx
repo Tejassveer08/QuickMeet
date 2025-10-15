@@ -5,6 +5,7 @@ import { usePreferences } from '@/context/PreferencesContext';
 import { createDropdownOptions, isChromeExt, populateDurationOptions, populateRoomCapacity, renderError } from '@/helpers/utility';
 import { Box, Button, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import EventSeatRoundedIcon from '@mui/icons-material/EventSeatRounded';
@@ -14,6 +15,7 @@ import TitleIcon from '@mui/icons-material/Title';
 import { useApi } from '@/context/ApiContext';
 
 export default function PreferenceView() {
+  const { t } = useTranslation();
   // Form state
   const [formData, setFormData] = useState({
     floor: '',
@@ -40,7 +42,7 @@ export default function PreferenceView() {
   useEffect(() => {
     const init = (floors: string[], capacities: string[]) => {
       const floorOptions = createDropdownOptions(floors);
-      floorOptions.unshift({ text: 'No preference', value: '' });
+      floorOptions.unshift({ text: t('preferences.noPreference'), value: '' });
 
       setFloorOptions(floorOptions);
       setRoomCapacityOptions(createDropdownOptions(capacities));
@@ -95,7 +97,7 @@ export default function PreferenceView() {
       duration: Number(formData.duration),
     });
 
-    toast.success('Saved successfully!');
+    toast.success(t('preferences.saved'));
   };
 
   return (
@@ -127,7 +129,7 @@ export default function PreferenceView() {
             sx={{ borderTopLeftRadius: 10, borderTopRightRadius: 10, height: '60px' }}
             id="floor"
             value={formData.floor}
-            placeholder={'Select preferred floor'}
+            placeholder={t('preferences.selectFloor')}
             options={floorOptions}
             onChange={handleInputChange}
             icon={
@@ -147,7 +149,7 @@ export default function PreferenceView() {
             value={formData.duration}
             options={durationOptions}
             onChange={handleInputChange}
-            placeholder={'Select preferred meeting duration'}
+            placeholder={t('preferences.selectDuration')}
             icon={
               <HourglassBottomRoundedIcon
                 sx={[
@@ -162,7 +164,7 @@ export default function PreferenceView() {
           <Dropdown
             sx={{ height: '60px', borderBottomLeftRadius: 15, borderBottomRightRadius: 15 }}
             id="seats"
-            placeholder={'Select preferred room capacity'}
+            placeholder={t('preferences.selectCapacity')}
             value={formData.seats + ''}
             options={roomCapacityOptions}
             onChange={handleInputChange}
@@ -189,7 +191,7 @@ export default function PreferenceView() {
               />
             }
             id="title"
-            placeholder="Add preferred title"
+            placeholder={t('preferences.titlePlaceholder')}
             onChange={handleInputChange}
           />
         </Box>
@@ -222,7 +224,7 @@ export default function PreferenceView() {
           ]}
         >
           <Typography variant="h6" fontWeight={700}>
-            Save
+            {t('preferences.save')}
           </Typography>
         </Button>
       </Box>

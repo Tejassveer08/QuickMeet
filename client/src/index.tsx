@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { StyledEngineProvider } from '@mui/material/styles';
 import { secrets } from './config/secrets';
 import './styles.css';
+import './i18n';
 import { PreferencesProvider } from './context/PreferencesContext';
 import { ApiProvider } from '@/context/ApiContext';
 import { LocalizationProvider } from '@mui/x-date-pickers';

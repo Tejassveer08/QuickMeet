@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "preferences": "पसंद",
+    "support": "सहायता",
+    "logout": "लॉग आउट"
+  },
+  "preferences": {
+    "noPreference": "कोई प्राथमिकता नहीं",
+    "selectFloor": "पसंदीदा मंज़िल चुनें",
+    "selectDuration": "पसंदीदा मीटिंग अवधि चुनें",
+    "selectCapacity": "पसंदीदा कक्ष क्षमता चुनें",
+    "titlePlaceholder": "पसंदीदा शीर्षक जोड़ें",
+    "save": "सहेजें",
+    "saved": "सफलतापूर्वक सहेजा गया!"
+  },
+  "home": {
+    "newEvent": "नया इवेंट",
+    "myEvents": "मेरे इवेंट"
+  }
+}
+
+

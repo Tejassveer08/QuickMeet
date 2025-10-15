@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "preferences": "Preferences",
+    "support": "Support",
+    "logout": "Logout"
+  },
+  "preferences": {
+    "noPreference": "No preference",
+    "selectFloor": "Select preferred floor",
+    "selectDuration": "Select preferred meeting duration",
+    "selectCapacity": "Select preferred room capacity",
+    "titlePlaceholder": "Add preferred title",
+    "save": "Save",
+    "saved": "Saved successfully!"
+  },
+  "home": {
+    "newEvent": "New Event",
+    "myEvents": "My Events"
+  }
+}
+
+

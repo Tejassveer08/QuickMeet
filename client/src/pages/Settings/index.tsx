@@ -8,9 +8,13 @@ import { useState } from 'react';
 import { chromeBackground, isChromeExt } from '@helpers/utility';
 import { styled, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
+import LanguageIcon from '@mui/icons-material/Language';
+import { MenuItem, Select } from '@mui/material';
+import i18n from '@/i18n';
 import PreferenceView from '@/pages/Settings/PreferenceView';
 import SupportView from '@/pages/Settings/SupportView';
 import LogoutView from '@/pages/Settings/LogoutView';
+import { useTranslation } from 'react-i18next';
 
 const TopBar = styled(Box)(({ theme }) => ({
   paddingTop: theme.spacing(1.5),
@@ -57,6 +61,8 @@ const StyledToggleButton = styled(ToggleButton)(({ theme }) => ({
 export default function Settings() {
   const [tabIndex, setTabIndex] = useState(0);
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const [language, setLanguage] = useState(i18n.language || 'en');
 
   const handleTabChange = (_: React.SyntheticEvent | null, newValue: number) => {
     if (newValue !== null) {
@@ -66,6 +72,12 @@ export default function Settings() {
 
   const handleBackClick = () => {
     navigate(ROUTES.home);
+  };
+
+  const handleLanguageChange = (event: any) => {
+    const newLang = event.target.value;
+    setLanguage(newLang);
+    i18n.changeLanguage(newLang);
   };
 
   if (!open) {
@@ -119,28 +131,41 @@ export default function Settings() {
           >
             <StyledToggleButtonGroup sx={{ mx: 0 }} value={tabIndex} exclusive onChange={handleTabChange} aria-label="event tabs" fullWidth={true}>
               <StyledToggleButton value={0} aria-label="new event" fullWidth={true}>
-                Preferences
+                {t('nav.preferences')}
               </StyledToggleButton>
               <StyledToggleButton value={1} aria-label="my events" fullWidth={true}>
-                Support
+                {t('nav.support')}
               </StyledToggleButton>
             </StyledToggleButtonGroup>
           </Box>
-          {/* logout icon */}
+          {/* language + logout */}
           <Box
             sx={[
               (theme) => ({
                 borderRadius: 100,
-                backgroundColor: tabIndex === 2 ? theme.palette.grey[100] : 'white',
-                p: 1,
+                backgroundColor: 'white',
+                px: 1,
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
                 textAlign: 'center',
+                gap: 1,
                 ml: 0,
               }),
             ]}
           >
+            <LanguageIcon fontSize="small" />
+            <Select
+              size="small"
+              value={language}
+              onChange={handleLanguageChange}
+              variant="standard"
+              disableUnderline
+              sx={{ minWidth: 60 }}
+            >
+              <MenuItem value="en">EN</MenuItem>
+              <MenuItem value="hi">HI</MenuItem>
+            </Select>
             <IconButton aria-label="settings" sx={{ mr: 0, backgroundColor: 'white' }} onClick={() => handleTabChange(null, 2)}>
               <ExitToAppRoundedIcon
                 fontSize="small"
